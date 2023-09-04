@@ -1,10 +1,12 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
-
+import './Navbar.css';
 
 const Navbar: FC = () => {
   return (
-    <div>Navbar</div>
+    <div className="navbar">
+      <h1>Face Detection</h1>
+    </div>
   );
 };
 
