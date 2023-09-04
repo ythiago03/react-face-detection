@@ -1,0 +1,7 @@
+.navbar{
+  display: flex;
+  padding: 1.5rem;
+  background-color: #A083E8;
+  color: white;
+  height: 80px;
+}
