@@ -1,8 +1,9 @@
 import { FC, useEffect, useRef } from 'react';
 import * as faceapi from 'face-api.js';
 
+import './Detections.css';
 
-const Detections: FC = () => {
+const Detections: FC = ({url}) => {
 
 
   
@@ -19,11 +20,11 @@ const Detections: FC = () => {
     canvasRef.current.innerHtml = faceapi.createCanvasFromMedia(imgRef.current);
     faceapi.matchDimensions(canvasRef.current, {
       width: 700,
-      height: 470,
+      height: 500,
     });
     const resized = faceapi.resizeResults(detections, {
       width: 700,
-      height: 470,
+      height: 500,
     });
     faceapi.draw.drawDetections(canvasRef.current, resized);
     faceapi.draw.drawFaceExpressions(canvasRef.current, resized);
@@ -45,8 +46,24 @@ const Detections: FC = () => {
 
   return (
     <div>
+      <div className="detections">
 
-<img 
+        <div className="detections-img">
+          <img 
+            crossOrigin="anonymous"
+            ref={imgRef} 
+            src={url}
+            alt="Photos" 
+          />
+          <canvas ref={canvasRef}/>
+        </div>
+        <div className="tags">
+          <h1>Tag your friends</h1>
+          
+        </div> 
+
+      </div>
+      {/* <img 
         crossOrigin="anonymous"
         ref={imgRef} 
         src="https://cdn.pixabay.com/photo/2014/06/18/13/44/emotions-371238_1280.jpg" 
@@ -54,7 +71,7 @@ const Detections: FC = () => {
         width={700}
         height={470}
       />
-      <canvas ref={canvasRef} width={700} height={470}/>
+      <canvas ref={canvasRef} width={700} height={470}/> */}
 
     </div>
   );
