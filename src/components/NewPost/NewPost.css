@@ -80,3 +80,11 @@
   font-weight: 500;
   font-size: 100%;
 }
+
+.urlImg{
+  padding: .5rem 1rem;
+  border-radius: 5px;
+  color: #A083E8;
+  outline: none;
+  border: none;
+}
