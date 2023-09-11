@@ -1,11 +1,11 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import * as faceapi from 'face-api.js';
 
 import './Detections.css';
 
 const Detections: FC = ({url}) => {
 
-
+  const [faces, setFaces] = useState(['fdf','fdfd']);
   
     
   const imgRef = useRef();
@@ -60,8 +60,12 @@ const Detections: FC = ({url}) => {
         <div className="tags">
           <h1>Tag your friends</h1>
           
+          {faces.map((face, i) => {
+            return <input key={face} type="text" placeholder={`Friend ${faces[i]}`} />;
+          })}
+          <button onClick={() => window.location.reload()}>Upload a new image</button>
         </div> 
-
+        
       </div>
       {/* <img 
         crossOrigin="anonymous"

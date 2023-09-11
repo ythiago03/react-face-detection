@@ -7,10 +7,20 @@ const NewPost: FC = () => {
 
   const [file, setFile] = useState(null);
   const [urlImg, setUrlImg] = useState(null);
+  const [inputUrl, setInputUrl] = useState(null);
 
   useEffect(() => {
     file && setUrlImg(URL.createObjectURL(file));  
   }, [file]);
+
+  const submitUrl = () => {
+    if(!inputUrl)return;
+    if(!inputUrl.toLowerCase().endsWith('.jpg' || '.pgn' || '.jpeg')){
+      window.alert('Please choose a Url with ends with JPEG, PGN or JPG');
+      return;
+    }
+    if(!file)setUrlImg(inputUrl);
+  };
 
   return (
     <div>
@@ -28,7 +38,8 @@ const NewPost: FC = () => {
               <input onChange={e => setFile(e.target.files[0])}  type="file" style={{visibility:'hidden'}} />
             </label>
             <span>Or place a URL from an image</span>
-            <button>Upload Image</button>
+            <input type="text" className="urlImg" onChange={e => setInputUrl(e.target.value)}/>
+            <button onClick={submitUrl} >Upload Image</button>
           </div> 
 
         </div>
