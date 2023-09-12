@@ -6,12 +6,27 @@ import Detections from '../Detections/Detections';
 const NewPost: FC = () => {
 
   const [file, setFile] = useState(null);
-  const [urlImg, setUrlImg] = useState(null);
+  const [image, setImage] = useState(null);
   const [inputUrl, setInputUrl] = useState(null);
 
+  const getImage = () => {
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    img.onload = () => {
+      setImage({
+        url: img.src,
+        width: img.width,
+        height: img.height,
+      });  
+    };
+  };
+
   useEffect(() => {
-    file && setUrlImg(URL.createObjectURL(file));  
+    file && getImage();
   }, [file]);
+
+  
+  
 
   const submitUrl = () => {
     if(!inputUrl)return;
@@ -19,13 +34,22 @@ const NewPost: FC = () => {
       window.alert('Please choose a Url with ends with JPEG, PGN or JPG');
       return;
     }
-    if(!file)setUrlImg(inputUrl);
+    if(!file){
+      const img = new Image();
+      img.onload = () => {
+        setImage({
+          url: inputUrl,
+          width: img.width,
+          height: img.height,
+        });  
+      };
+    }
   };
-
+  console.log(image);
   return (
     <div>
-      {urlImg 
-        ? <Detections url={urlImg} />
+      {image 
+        ? <Detections image={image} />
         : <div  className="newPost">
 
           <div className="image">
