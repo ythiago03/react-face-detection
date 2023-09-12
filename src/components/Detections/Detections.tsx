@@ -3,7 +3,7 @@ import * as faceapi from 'face-api.js';
 
 import './Detections.css';
 
-const Detections: FC = ({url}) => {
+const Detections: FC = (image) => {
 
   const [faces, setFaces] = useState(['fdf','fdfd']);
   
@@ -19,12 +19,12 @@ const Detections: FC = ({url}) => {
 
     canvasRef.current.innerHtml = faceapi.createCanvasFromMedia(imgRef.current);
     faceapi.matchDimensions(canvasRef.current, {
-      width: 700,
-      height: 500,
+      width: width,
+      height: height,
     });
     const resized = faceapi.resizeResults(detections, {
-      width: 700,
-      height: 500,
+      width: width,
+      height: height,
     });
     faceapi.draw.drawDetections(canvasRef.current, resized);
     faceapi.draw.drawFaceExpressions(canvasRef.current, resized);
@@ -52,7 +52,7 @@ const Detections: FC = ({url}) => {
           <img 
             crossOrigin="anonymous"
             ref={imgRef} 
-            src={url}
+            src={image.url}
             alt="Photos" 
           />
           <canvas ref={canvasRef}/>
